@@ -9,7 +9,7 @@ function [ A ] = myQR( A )
         end
         u = s*norm(x)*eye(size(x)) + x;
         u = u / u(1);
-        gam = 2 / norm(u)^2;
+        gam = 2 / sumsqr(u);
         A(k:m,k:n) = A(k:m,k:n) - (gam*u)*(u'*A(k:m,k:n));
         A(k+1:m,k) = u(2:m-k+1);
     end
