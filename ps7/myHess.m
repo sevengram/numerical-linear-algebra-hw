@@ -1,4 +1,4 @@
-function [ A ] = hess( A )
+function [ A ] = myHess( A )
     [~,n] = size(A);
     for k = 1:n-2;
         x = A(k+1:n,k);

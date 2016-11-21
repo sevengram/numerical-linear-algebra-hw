@@ -1,7 +1,7 @@
 function [ A, p ] = myLU( A, pivoting )
     [n,~] = size(A);
     p = 1:n;
-    for k=1:n
+    for k=1:n-1
         if pivoting == 1
             for i=k+1:n
                 if A(p(i),k) > A(p(k), k)
