@@ -24,33 +24,18 @@ function [ V, W, x, y] = fastqr_single_iter( V, W, x, y, mu)
     end
     sigma(n-1) = rr * h(:,n-1);
     g(:,n)= rr';
-    
-%     VV = eye(n);
-%     WW = eye(n);
-%     for i = n-1:-1:2
-%         VV = VV * wrap(V(:,:,i), i, n);
-%     end
-%     for i = 1:n-2
-%         WW = WW * wrap(W(:,:,i), i, n);
-%     end
-%     A = VV*WW - x*y'
-%     eig(A)
-% 
-%     A1 = [g(:,1)' * h(:,1); sigma(1); x(3:n) * y(1)] - x(1:n,1) * y(1)
-%     A13 = zeros(3,n);
-%     for k=1:3
-%         HH = zeros(2,n);
-%         HH(:,k) = h(:,k);
-%         BB = eye(2);
-%         for i=k+1:n
-%             BB = BB * B(:,:,i);
-%             HH(:,i) = BB * h(:,i);
-%         end
-%         A13(k,:) = g(:,k)' * HH - y(1:n,1)' * x(k);
-%     end
-%     A13(:,1) = A1(1:3);
-%     A13(3,2) = sigma(2) - x(3)*y(2);
-%     A13
+
+    VV = eye(n);
+    WW = eye(n);
+    for i = n-1:-1:2
+        VV = VV * wrap(V(:,:,i), i, n);
+    end
+    for i = 1:n-2
+        WW = WW * wrap(W(:,:,i), i, n);
+    end
+    U = VV*WW
+    A = U - x*y'
+    eig(A)
     
     % Step 2
     beta = x(n);
@@ -77,10 +62,10 @@ function [ V, W, x, y] = fastqr_single_iter( V, W, x, y, mu)
             d(k+1:k+2) = T(1:2,2);
         end
         x(k:k+1) = P(:,:,k)'*x(k:k+1);
+        y(k:k+1) = P(:,:,k)'*y(k:k+1);
         if k == 1
             x_2 = x(2);
         end
-        y(k:k+1) = P(:,:,k)'*y(k:k+1);
     end
     
     % Step 4

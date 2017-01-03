@@ -5,4 +5,3 @@ function [ U, x ] = companion( alphas )
     x = alphas;
     x(1) = x(1) + 1;
 end
-

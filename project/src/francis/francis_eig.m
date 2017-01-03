@@ -18,7 +18,7 @@ function [ result ] = francis_eig( A, l, r )
                 % Perform the shift
                 x = zeros(r+1-l, 1);
                 x(1) = rho1;
-                x = (A(l:r, l:r) - rho2*eye(r+1-l))*(A(l:r, l) - x);
+                x = (A(l:r, l:r) - rho2 * eye(r+1-l)) * (A(l:r, l)-x);
             else
                 x = A(k:r, k-1);
             end
@@ -34,7 +34,7 @@ function [ result ] = francis_eig( A, l, r )
             else
                 A(k:r, k-1:r) = A(k:r, k-1:r) - gam*u*(u'*A(k:r, k-1:r));
             end
-            A(l:r, k:r) = A(l:r, k:r) - gam*(A(1:r, k:r)*u)*u';
+            A(l:r, k:r) = A(l:r, k:r) - gam*(A(l:r, k:r)*u)*u';
         end
         for k = r-1:-1:l
             % Check subdiagonal elements

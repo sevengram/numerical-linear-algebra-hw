@@ -29,7 +29,7 @@ function [ A ] = francis_double_rec( A, l, r )
             else
                 A(k:r, k-1:r) = A(k:r, k-1:r) - gam*u*(u'*A(k:r, k-1:r));
             end
-            A(l:r, k:r) = A(l:r, k:r) - gam*(A(1:r, k:r)*u)*u';
+            A(l:r, k:r) = A(l:r, k:r) - gam*(A(l:r, k:r)*u)*u';
         end
         for k = r-1:-1:l
             % Check subdiagonal elements
